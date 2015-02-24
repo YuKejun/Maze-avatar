@@ -22,7 +22,7 @@ public class AvatarCamController : MonoBehaviour {
 		// do transition
 		if (is_switching) {
 			// if switching is completed
-			if (transform.rotation.x == dest_rotate.x) {
+			if (transform.rotation == dest_rotate) {
 				is_switching = false;
 				is_at_bird = !is_at_bird;
 				return;
