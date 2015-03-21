@@ -7,8 +7,8 @@ public class AvatarController : MonoBehaviour {
 	public float walking_speed;
 	public float rotating_speed;
 
-	public Camera player_camera;
-	public Camera main_camera;
+	public Camera camera;
+	private AvatarCamController camController;
 
 	private bool is_walking;
 	private bool can_walk;
@@ -26,48 +26,43 @@ public class AvatarController : MonoBehaviour {
 		can_walk = true;
 		rigidbody = GetComponent<Rigidbody>();
 		walking_origin = transform.position;
-		player_camera.enabled = true;
-		main_camera.enabled = false;
+		camera.enabled = true;
+		camController = (AvatarCamController) camera.GetComponent ("AvatarCamController");
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-//		Debug.Log ("Actual position: " + transform.position);
-//		Debug.Log ("Theoretical position: " + transform.position);
-		if (is_walking && Vector3.Distance(transform.position, walking_dest) <= walking_speed * Time.deltaTime) {
-			Stop ();
-			walking_origin = walking_dest;
-			return;
-		}
-		if (is_rotating) {
-			if (transform.rotation == rotate_dest) {
-				is_rotating = false;
+		if (!camController.isAtBirdEyeView() && !camController.isSwitching()) {
+			if (is_walking && Vector3.Distance (transform.position, walking_dest) <= walking_speed * Time.deltaTime) {
+				Stop ();
+				walking_origin = walking_dest;
 				return;
 			}
-			transform.rotation = Quaternion.RotateTowards(transform.rotation, rotate_dest, rotating_speed * Time.deltaTime);
-			return;
-		}
 
-		if (can_walk && !is_walking && Input.GetKey ("space")) {
-			Debug.Log ("Walk!!!!!!!!!!!!!!!!");
-			is_walking = true;
-			walking_dest = walking_origin + transform.rotation * Vector3.right * grid_size;
-			rigidbody.velocity = transform.rotation * Vector3.right * walking_speed;
-			return;
-		}
+			if (is_rotating) {
+				if (transform.rotation == rotate_dest) {
+					is_rotating = false;
+					camController.enableSwitch(false);
+					return;
+				}
+				transform.rotation = Quaternion.RotateTowards (transform.rotation, rotate_dest, rotating_speed * Time.deltaTime);
+				return;
+			}
 
-		if (checkAndTurn (KeyCode.RightArrow, 90)) {
-			return;
-		} else if (checkAndTurn (KeyCode.LeftArrow, -90)) {
-			return;
-		}
+			if (can_walk && !is_walking && Input.GetKey ("space")) {
+				Debug.Log ("Walk!!!!!!!!!!!!!!!!");
+				is_walking = true;
+				camController.enableSwitch(false);
+				walking_dest = walking_origin + transform.rotation * Vector3.right * grid_size;
+				rigidbody.velocity = transform.rotation * Vector3.right * walking_speed;
+				return;
+			}
 
-		if (Input.GetKeyDown ("1")) {
-			player_camera.enabled = false;
-			main_camera.enabled = true;
-		} else if (Input.GetKeyDown ("2")) {
-			main_camera.enabled = false;
-			player_camera.enabled = true;
+			if (checkAndTurn (KeyCode.RightArrow, 90)) {
+				return;
+			} else if (checkAndTurn (KeyCode.LeftArrow, -90)) {
+				return;
+			}
 		}
 	}
 
@@ -85,6 +80,7 @@ public class AvatarController : MonoBehaviour {
 
 	private void Stop() {
 		is_walking = false;
+		camController.enableSwitch(true);
 		rigidbody.velocity = new Vector3(0, 0, 0);
 	}
 
@@ -92,6 +88,7 @@ public class AvatarController : MonoBehaviour {
 		if (!is_rotating && !is_walking && Input.GetKeyDown (keycode)) {
 			is_rotating = true;
 			rotate_dest = transform.rotation * Quaternion.Euler (0, rotation, 0);
+			camController.enableSwitch(false);
 			return true;
 		}
 		return false;
