@@ -45,6 +45,7 @@ public class CharactorController : MonoBehaviour
 		{
 				if (!camController.isAtBirdEyeView () && !camController.isSwitching ()) {
 						if (is_walking && Vector3.Distance (transform.position, walking_dest) <= walking_speed * Time.deltaTime) {
+								Debug.Log ("Stop!!!!!!!");
 								Stop ();
 								walking_origin = walking_dest;
 								return;
@@ -53,7 +54,7 @@ public class CharactorController : MonoBehaviour
 						if (is_rotating) {
 								if (transform.rotation == rotate_dest) {
 										is_rotating = false;
-										camController.enableSwitch (false);
+										camController.enableSwitch (true);
 										return;
 								}
 								transform.rotation = Quaternion.RotateTowards (transform.rotation, rotate_dest, rotating_speed * Time.deltaTime);
@@ -61,7 +62,6 @@ public class CharactorController : MonoBehaviour
 						}
 			
 						if (can_walk && !is_walking && Input.GetKey ("space")) {
-								Debug.Log ("Walk!!!!!!!!!!!!!!!!");
 								is_walking = true;
 								camController.enableSwitch (false);
 								walking_dest = walking_origin + transform.rotation * Vector3.forward * grid_size;
@@ -83,7 +83,6 @@ public class CharactorController : MonoBehaviour
 		// When bump into walls
 		void OnTriggerEnter (Collider other)
 		{
-				Debug.Log ("Bang!!!!!!!!!!!!!!!!");
 				Stop ();
 				can_walk = false;
 				transform.position = walking_origin;
@@ -98,6 +97,7 @@ public class CharactorController : MonoBehaviour
 		{
 				is_walking = false;
 				camController.enableSwitch (true);
+				transform.position = walking_dest;
 				rigidbody.velocity = new Vector3 (0, 0, 0);
 				animation.CrossFade (animationList [0] as string, 0.01f);
 		}
