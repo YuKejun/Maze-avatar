@@ -68,7 +68,7 @@ public class CharactorController : MonoBehaviour
 								rigidbody.velocity = transform.rotation * Vector3.forward * walking_speed;
 
 								//animation
-								animation.CrossFade (animationList [1] as string, 0.01f);
+//								animation.CrossFade (animationList [1] as string, 0.01f);
 								return;
 						}
 			
@@ -83,6 +83,14 @@ public class CharactorController : MonoBehaviour
 		// When bump into walls
 		void OnTriggerEnter (Collider other)
 		{
+				if (other.tag == "Present") {
+						Stop ();
+						can_walk = false;
+						Destroy (other.gameObject);
+						camController.finalView (transform.position);
+						animation.CrossFade (animationList [0] as string, 0.01f);
+						return;
+				}
 				Stop ();
 				can_walk = false;
 				transform.position = walking_origin;
@@ -99,7 +107,7 @@ public class CharactorController : MonoBehaviour
 				camController.enableSwitch (true);
 				transform.position = walking_dest;
 				rigidbody.velocity = new Vector3 (0, 0, 0);
-				animation.CrossFade (animationList [0] as string, 0.01f);
+//				animation.CrossFade (animationList [0] as string, 0.01f);
 		}
 	
 		private bool checkAndTurn (KeyCode keycode, int rotation)
