@@ -11,6 +11,7 @@ public class CharactorController : MonoBehaviour
 		public Camera camera;
 
 		public float animationSpeed = 1.0f;
+		public GUIText winText;
 	
 		private ArrayList animationList;//list of animations
 
@@ -89,6 +90,7 @@ public class CharactorController : MonoBehaviour
 						Destroy (other.gameObject);
 						camController.finalView (transform.position);
 						animation.CrossFade (animationList [0] as string, 0.01f);
+						winText.text = "YOU WIN!";
 						return;
 				}
 				Stop ();
