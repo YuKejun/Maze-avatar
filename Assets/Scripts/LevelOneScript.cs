@@ -12,6 +12,7 @@ public class LevelOneScript : MonoBehaviour {
 	
 	private string clicked = "hide", MessageDisplayOnAbout = "About \n ";
 	private Rect WindowRect = new Rect((Screen.width / 2) - 100, Screen.height / 2, 200, 200);
+	private Rect FloatButton = new Rect(0, Screen.height - 30, 100, 30);
 	private float volume = 1.0f;
 	
 	private void Start()
@@ -39,6 +40,10 @@ public class LevelOneScript : MonoBehaviour {
 		}
 		if (clicked == "hide") 
 		{
+			if (GUI.Button(FloatButton, "Menu"))
+			{
+				clicked = "";
+			}
 		}
 
 	}
