@@ -9,7 +9,7 @@ public class StartSceneScript : MonoBehaviour {
 	public string levelToLoadWhenClickedPlay = "";
 	public string[] AboutTextLines = new string[0];
 	
-	
+	private bool toggle = false;
 	private string clicked = "", MessageDisplayOnAbout = "About \n ";
 	private Rect WindowRect = new Rect((Screen.width / 2) - 100, Screen.height / 2, 200, 200);
 	private float volume = 1.0f;
@@ -84,6 +84,16 @@ public class StartSceneScript : MonoBehaviour {
 	
 	private void optionsFunc(int id)
 	{
+		if (GUILayout.Button("Birds'-Eye-View ON"))
+		{
+			AvatarCamController.can_switch = true;
+			clicked = "";
+		}
+		if (GUILayout.Button("Birds'-Eye-View OFF"))
+		{
+			AvatarCamController.can_switch = false;
+			clicked = "";
+		}
 		if (GUILayout.Button("Resolution"))
 		{
 			clicked = "resolution";

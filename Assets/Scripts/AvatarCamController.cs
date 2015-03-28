@@ -14,7 +14,7 @@ public class AvatarCamController : MonoBehaviour
 		private bool final_view;
 		private Vector3 final_center;
 
-		private bool can_switch;
+		public static bool can_switch = false;
 		private bool is_switching;
 		private bool is_at_bird; // whether the camera is at birds'-eye-view
 		private Vector3 dest_pos;
@@ -24,7 +24,6 @@ public class AvatarCamController : MonoBehaviour
 		void Start ()
 		{
 				is_at_bird = false;
-				can_switch = true;
 				final_view = false;
 		}
 	
