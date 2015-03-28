@@ -84,14 +84,14 @@ public class StartSceneScript : MonoBehaviour {
 	
 	private void optionsFunc(int id)
 	{
-		if (GUILayout.Button("Birds'-Eye-View ON"))
+		string birdsEyeStatus = "ON";
+		if (AvatarCamController.can_switch) 
 		{
-			AvatarCamController.can_switch = true;
-			clicked = "";
+			birdsEyeStatus = "OFF";
 		}
-		if (GUILayout.Button("Birds'-Eye-View OFF"))
+		if (GUILayout.Button("Turn Birds'-Eye-View " + birdsEyeStatus))
 		{
-			AvatarCamController.can_switch = false;
+			AvatarCamController.can_switch = !AvatarCamController.can_switch;
 			clicked = "";
 		}
 		if (GUILayout.Button("Resolution"))
