@@ -128,6 +128,9 @@ public class TutorialCharactorController : MonoBehaviour
 				ArrayList tmpArray = new ArrayList ();
 		
 				foreach (AnimationState state in gameObject.animation) {
+						if (state.name == "Walk") {
+								state.speed = animationSpeed;
+						}
 						tmpArray.Add (state.name);
 						print (state.name);
 				}
