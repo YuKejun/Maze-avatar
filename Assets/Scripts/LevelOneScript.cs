@@ -42,6 +42,7 @@ public class LevelOneScript : MonoBehaviour {
 		{
 			if (GUI.Button(FloatButton, "Menu"))
 			{
+				CharactorController.can_action = false;
 				clicked = "";
 			}
 		}
@@ -51,8 +52,9 @@ public class LevelOneScript : MonoBehaviour {
 	private void menuFunc(int id)
 	{
 		//buttons 
-		if (GUILayout.Button("Resume"))
+		if ( GUILayout.Button("Resume"))
 		{
+			CharactorController.can_action = true;
 			clicked = "hide";
 		}
 		if (GUILayout.Button("Level 1"))
@@ -75,8 +77,11 @@ public class LevelOneScript : MonoBehaviour {
 
 	private void Update()
 	{
-		if (clicked == "hide" && Input.GetKey (KeyCode.Escape))
+		if (clicked == "hide" && Input.GetKey (KeyCode.Escape)) 
+		{
+			CharactorController.can_action = false;
 			clicked = "";
+		}
 	}
 
 }

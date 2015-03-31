@@ -38,7 +38,7 @@ public class CharactorController : MonoBehaviour
 		public float final_rot_speed = 15.0f;
 		private Vector3 final_center;
 		
-		public static bool can_switch = true;
+		public static bool can_switch = false;
 		private Vector3 cam_dest_pos;
 		private Quaternion cam_dest_rotate;   // the target position and rotation of the camera during switching
 
