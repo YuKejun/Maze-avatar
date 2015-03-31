@@ -4,13 +4,13 @@ using System.Collections;
 public class AvatarCamController : MonoBehaviour
 {
 
-		public float bird_height;
-		public float bird_angle;
-		public float switch_time;  // the time period to complete view switching
+		public float bird_height = 10.0f;
+		public float bird_angle = 70.0f;
+		public float switch_time = 1.0f;  // the time period to complete view switching
 
-		public float final_radius;
-		public float final_height;
-		public float final_rot_speed;
+		public float final_radius = 0.6f;
+		public float final_height = 0.6f;
+		public float final_rot_speed = 15.0f;
 		private bool final_view;
 		private Vector3 final_center;
 
