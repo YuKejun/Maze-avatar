@@ -5,15 +5,11 @@ public class StartSceneScript : MonoBehaviour {
 
 	public GUISkin guiSkin;
 	public Texture2D background, LOGO;
-	public bool DragWindow = false;
-	public string levelToLoadWhenClickedPlay = "";
 	public string[] AboutTextLines = new string[0];
 	
-	private bool toggle = false;
+	private int levelToPlay = 1;
 	private string clicked = "", MessageDisplayOnAbout = "About \n ";
-	private Rect WindowRect = new Rect((Screen.width / 2) - 100, Screen.height / 2, 200, 200);
-	private float volume = 1.0f;
-	
+
 	private void Start()
 	{
 		for (int x = 0; x < AboutTextLines.Length;x++ )
@@ -33,110 +29,39 @@ public class StartSceneScript : MonoBehaviour {
 			GUI.DrawTexture(new Rect((Screen.width / 2) - 100, 30, 200, 200), LOGO);
 		
 		GUI.skin = guiSkin;
-		if (clicked == "")
-		{
-			WindowRect = GUI.Window(0, WindowRect, menuFunc, "Main Menu");
-		}
-		else if (clicked == "options")
-		{
-			WindowRect = GUI.Window(1, WindowRect, optionsFunc, "Options");
-		}
-		else if (clicked == "about")
-		{
-			GUI.Box(new Rect (0,0,Screen.width,Screen.height), MessageDisplayOnAbout);
-		}else if (clicked == "play")
-		{
-			WindowRect = GUI.Window(2, WindowRect, playFunc, "Choose Game Level");
-		}else if (clicked == "resolution")
-		{
-			GUILayout.BeginVertical();
-			for (int x = 0; x < Screen.resolutions.Length;x++ )
-			{
-				if (GUILayout.Button(Screen.resolutions[x].width + "X" + Screen.resolutions[x].height))
-				{
-					Screen.SetResolution(Screen.resolutions[x].width,Screen.resolutions[x].height,true);
-				}
-			}
-			GUILayout.EndVertical();
-			GUILayout.BeginHorizontal();
-			if (GUILayout.Button("Back"))
-			{
-				clicked = "options";
-			}
-			GUILayout.EndHorizontal();
-		}
-	}
 
-	private void playFunc(int id)
-	{
-		if (GUILayout.Button("Level 1"))
+		if (GUI.Button (new Rect ((Screen.width / 10), (float) 0.25 * Screen.height, (Screen.width / 6), (Screen.width / 20)), "Level 1"))
 		{
-			//play game is clicked
-			Application.LoadLevel(1);
-			clicked = "play";
+			levelToPlay  = 1;
 		}
-		if (GUILayout.Button("Level 2"))
+		if (GUI.Button (new Rect ((Screen.width / 3), (float) 0.25 * Screen.height, (Screen.width / 6), (Screen.width / 20)), "Level 2"))
 		{
-			Application.LoadLevel(2);
-			clicked = "play";
+			levelToPlay = 2;
 		}
-	}
-	
-	private void optionsFunc(int id)
-	{
-		string birdsEyeStatus = "ON";
-		if (AvatarCamController.can_switch) 
+		string birdEyeStats = "Turn Bird-Eye-View ON";
+		if (CharactorController.can_switch == true)
 		{
-			birdsEyeStatus = "OFF";
+			birdEyeStats = "Turn Bird-Eye-View OFF";
 		}
-		if (GUILayout.Button("Turn Birds'-Eye-View " + birdsEyeStatus))
+		if (GUI.Button (new Rect ((Screen.width / 10), (float) 0.40 * Screen.height, (float) 0.4 * Screen.width, (Screen.width / 20)), birdEyeStats))
 		{
-			AvatarCamController.can_switch = !AvatarCamController.can_switch;
-			clicked = "";
+			CharactorController.can_switch = !CharactorController.can_switch;
 		}
-		if (GUILayout.Button("Resolution"))
+		string displayStr = "Level " + levelToPlay + " selected with Bird-Eye-view ON";
+		if (CharactorController.can_switch == false)
 		{
-			clicked = "resolution";
+			displayStr = "Level " + levelToPlay + " selected with Bird-Eye-view OFF";
 		}
-		GUILayout.Box("Volume");
-		volume = GUILayout.HorizontalSlider(volume ,0.0f,1.0f);
-		AudioListener.volume = volume;
-		if (GUILayout.Button("Back"))
+		GUI.TextField(new Rect((Screen.width / 10), (float) 0.55 * Screen.height, (float) 0.4 * Screen.width, (Screen.width / 20)), displayStr);
+		if (GUI.Button (new Rect ((Screen.width / 10), (float) 0.70 * Screen.height, (float) 0.4 * Screen.width, (Screen.width / 20)), "Start!"))
 		{
-			clicked = "";
+			Application.LoadLevel(levelToPlay);
 		}
-		if (DragWindow)
-			GUI.DragWindow(new Rect (0,0,Screen.width,Screen.height));
-	}
-	
-	private void menuFunc(int id)
-	{
-		//buttons 
-		if (GUILayout.Button("Play Game"))
-		{
-			//play game is clicked
-//			Application.LoadLevel(2);
-			clicked = "play";
-		}
-		if (GUILayout.Button("Options"))
-		{
-			clicked = "options";
-		}
-		if (GUILayout.Button("About"))
-		{
-			clicked = "about";
-		}
-		if (GUILayout.Button("Quit Game"))
+		if (GUI.Button (new Rect ((7 * Screen.width / 10), (float) 0.70 * Screen.height, (Screen.width / 6), (Screen.width / 20)), "Quit"))
 		{
 			Application.Quit();
 		}
-		if (DragWindow)
-			GUI.DragWindow(new Rect(0, 0, Screen.width, Screen.height));
+
 	}
-	
-	private void Update()
-	{
-		if (clicked == "about" && Input.GetKey (KeyCode.Escape))
-			clicked = "";
-	}
+
 }
