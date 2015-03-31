@@ -120,6 +120,9 @@ public class CharactorController : MonoBehaviour
 				walking_dest = walking_origin + transform.rotation * Vector3.forward * grid_size;
 				rigidbody.velocity = transform.rotation * Vector3.forward * walking_speed;
 				while (Vector3.Distance (transform.position, walking_dest) > walking_speed * Time.deltaTime) {
+					if (!can_walk) {
+						yield break;
+					}
 					yield return null;
 				}
 				Stop ();
@@ -131,6 +134,7 @@ public class CharactorController : MonoBehaviour
 		private IEnumerator Turn(int rotation) {
 			if (can_action) {
 				can_action = false;
+				can_walk = true;
 				rotate_dest = transform.rotation * Quaternion.Euler (0, rotation, 0);
 //				camController.enableSwitch (false);
 				while (transform.rotation != rotate_dest) {
@@ -147,7 +151,7 @@ public class CharactorController : MonoBehaviour
 		{
 				if (other.tag == "Present") {
 						Stop ();
-//						can_walk = false;
+						can_walk = false;
 						can_action = false;
 						Destroy (other.gameObject);
 						StartCoroutine(Congratulation());
@@ -204,6 +208,7 @@ public class CharactorController : MonoBehaviour
 		}
 
 		private IEnumerator Congratulation() {
+			can_action = false;
 			final_center = transform.position + new Vector3 (0, final_height, 0);//transform.position + new Vector3 (0, 0, 0.5f);
 			camera.transform.position = final_center + new Vector3 (0, 0, final_radius);
 			camera.transform.rotation = camera.transform.rotation * Quaternion.Euler (0, 180, 0);
@@ -211,6 +216,8 @@ public class CharactorController : MonoBehaviour
 			animation.CrossFade (animationList [0] as string, 0.01f);
 			winText.text = "YOU WIN!";
 			while (true) {
+//			Debug.Log (transform.position);
+				can_action = false;
 				camera.transform.LookAt (final_center);
 				camera.transform.RotateAround (final_center, Vector3.up, final_rot_speed * Time.deltaTime);
 				yield return null;
