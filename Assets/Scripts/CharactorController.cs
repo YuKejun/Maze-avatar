@@ -17,7 +17,7 @@ public class CharactorController : MonoBehaviour
 
 //		private AvatarCamController camController;
 
-	 	public static bool can_action;
+		public static bool can_action;
 		// for walking control
 //		private bool is_walking;
 		private bool can_walk;
@@ -98,52 +98,51 @@ public class CharactorController : MonoBehaviour
 //								return;
 //						}
 
-						if (Input.GetKey("space") && can_walk) {
-							StartCoroutine (Walk());
-						}
-						else if (Input.GetKeyDown (KeyCode.RightArrow)) {
-							StartCoroutine(Turn(90));
-		                }
-				        else if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-							StartCoroutine(Turn(-90));
-						}
-						else if (Input.GetKeyDown ("3") && can_switch) {
-							StartCoroutine(SwitchView ());
+						if (Input.GetKey ("space") && can_walk) {
+								StartCoroutine (Walk ());
+						} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
+								StartCoroutine (Turn (90));
+						} else if (Input.GetKeyDown (KeyCode.LeftArrow)) {
+								StartCoroutine (Turn (-90));
+						} else if (Input.GetKeyDown ("3") && can_switch) {
+								StartCoroutine (SwitchView ());
 						}
 				}
 		}
 
-		private IEnumerator Walk() {
-			if (can_action) {
-				can_action = false;
+		private IEnumerator Walk ()
+		{
+				if (can_action) {
+						can_action = false;
 //				camController.enableSwitch(false);
-				walking_dest = walking_origin + transform.rotation * Vector3.forward * grid_size;
-				rigidbody.velocity = transform.rotation * Vector3.forward * walking_speed;
-				while (Vector3.Distance (transform.position, walking_dest) > walking_speed * Time.deltaTime) {
-					if (!can_walk) {
-						yield break;
-					}
-					yield return null;
+						walking_dest = walking_origin + transform.rotation * Vector3.forward * grid_size;
+						rigidbody.velocity = transform.rotation * Vector3.forward * walking_speed;
+						while (Vector3.Distance (transform.position, walking_dest) > walking_speed * Time.deltaTime) {
+								if (!can_walk) {
+										yield break;
+								}
+								yield return null;
+						}
+						Stop ();
+						walking_origin = walking_dest;
+						can_action = true;
 				}
-				Stop ();
-				walking_origin = walking_dest;
-				can_action = true;
-			}
 		}
 
-		private IEnumerator Turn(int rotation) {
-			if (can_action) {
-				can_action = false;
-				can_walk = true;
-				rotate_dest = transform.rotation * Quaternion.Euler (0, rotation, 0);
+		private IEnumerator Turn (int rotation)
+		{
+				if (can_action) {
+						can_action = false;
+						can_walk = true;
+						rotate_dest = transform.rotation * Quaternion.Euler (0, rotation, 0);
 //				camController.enableSwitch (false);
-				while (transform.rotation != rotate_dest) {
-					transform.rotation = Quaternion.RotateTowards (transform.rotation, rotate_dest, rotating_speed * Time.deltaTime);
-					yield return null;
-				}
-				can_action = true;
+						while (transform.rotation != rotate_dest) {
+								transform.rotation = Quaternion.RotateTowards (transform.rotation, rotate_dest, rotating_speed * Time.deltaTime);
+								yield return null;
+						}
+						can_action = true;
 //				camController.enableSwitch (true);
-			}
+				}
 		}
 
 		// When bump into walls
@@ -154,7 +153,7 @@ public class CharactorController : MonoBehaviour
 						can_walk = false;
 						can_action = false;
 						Destroy (other.gameObject);
-						StartCoroutine(Congratulation());
+						StartCoroutine (Congratulation ());
 //						camController.finalView (transform.position);
 //						animation.CrossFade (animationList [0] as string, 0.01f);
 //						winText.text = "YOU WIN!";
@@ -180,48 +179,50 @@ public class CharactorController : MonoBehaviour
 //				animation.CrossFade (animationList [0] as string, 0.01f);
 		}
 
-		private IEnumerator SwitchView() {
-			can_action = false;
+		private IEnumerator SwitchView ()
+		{
+				can_action = false;
 			
-			cam_dest_pos = camera.transform.position + new Vector3 (0, bird_height, 0);
-			cam_dest_rotate = camera.transform.rotation * Quaternion.Euler (bird_angle, 0, 0);
+				cam_dest_pos = camera.transform.position + new Vector3 (0, bird_height, 0);
+				cam_dest_rotate = camera.transform.rotation * Quaternion.Euler (bird_angle, 0, 0);
 
-			while (camera.transform.rotation != cam_dest_rotate) {
-				camera.transform.position = Vector3.MoveTowards (camera.transform.position, cam_dest_pos, bird_height / switch_time * Time.deltaTime);
-				camera.transform.rotation = Quaternion.RotateTowards (camera.transform.rotation, cam_dest_rotate, bird_angle / switch_time * Time.deltaTime);
-				yield return null;
-			}
+				while (camera.transform.rotation != cam_dest_rotate) {
+						camera.transform.position = Vector3.MoveTowards (camera.transform.position, cam_dest_pos, bird_height / switch_time * Time.deltaTime);
+						camera.transform.rotation = Quaternion.RotateTowards (camera.transform.rotation, cam_dest_rotate, bird_angle / switch_time * Time.deltaTime);
+						yield return null;
+				}
 			
-			// wait till user switches back
-			while (!Input.GetKeyDown("3")) {
-					yield return null;
-			}
-			cam_dest_pos = camera.transform.position - new Vector3 (0, bird_height, 0);
-			cam_dest_rotate = camera.transform.rotation * Quaternion.Euler (-bird_angle, 0, 0);
-			while (camera.transform.rotation != cam_dest_rotate) {
-				camera.transform.position = Vector3.MoveTowards (camera.transform.position, cam_dest_pos, bird_height / switch_time * Time.deltaTime);
-				camera.transform.rotation = Quaternion.RotateTowards (camera.transform.rotation, cam_dest_rotate, bird_angle / switch_time * Time.deltaTime);
-				yield return null;
-			}
+				// wait till user switches back
+				while (!Input.GetKeyDown("3")) {
+						yield return null;
+				}
+				cam_dest_pos = camera.transform.position - new Vector3 (0, bird_height, 0);
+				cam_dest_rotate = camera.transform.rotation * Quaternion.Euler (-bird_angle, 0, 0);
+				while (camera.transform.rotation != cam_dest_rotate) {
+						camera.transform.position = Vector3.MoveTowards (camera.transform.position, cam_dest_pos, bird_height / switch_time * Time.deltaTime);
+						camera.transform.rotation = Quaternion.RotateTowards (camera.transform.rotation, cam_dest_rotate, bird_angle / switch_time * Time.deltaTime);
+						yield return null;
+				}
 
-			can_action = true;
+				can_action = true;
 		}
 
-		private IEnumerator Congratulation() {
-			can_action = false;
-			final_center = transform.position + new Vector3 (0, final_height, 0);//transform.position + new Vector3 (0, 0, 0.5f);
-			camera.transform.position = final_center + new Vector3 (0, 0, final_radius);
-			camera.transform.rotation = camera.transform.rotation * Quaternion.Euler (0, 180, 0);
-			camera.transform.LookAt (final_center);
-			animation.CrossFade (animationList [0] as string, 0.01f);
-			winText.text = "YOU WIN!";
-			while (true) {
-//			Debug.Log (transform.position);
+		private IEnumerator Congratulation ()
+		{
 				can_action = false;
+				final_center = transform.position + new Vector3 (0, final_height, 0);//transform.position + new Vector3 (0, 0, 0.5f);
+				camera.transform.position = final_center + new Vector3 (0, 0, final_radius);
+				camera.transform.rotation = camera.transform.rotation * Quaternion.Euler (0, 180, 0);
 				camera.transform.LookAt (final_center);
-				camera.transform.RotateAround (final_center, Vector3.up, final_rot_speed * Time.deltaTime);
-				yield return null;
-			}
+				animation.CrossFade (animationList [0] as string, 0.01f);
+				winText.text = "YOU WIN!";
+				while (true) {
+//			Debug.Log (transform.position);
+						can_action = false;
+						camera.transform.LookAt (final_center);
+						camera.transform.RotateAround (final_center, Vector3.up, final_rot_speed * Time.deltaTime);
+						yield return null;
+				}
 		}
 	
 //		private bool checkAndTurn (KeyCode keycode, int rotation)

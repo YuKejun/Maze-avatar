@@ -41,14 +41,14 @@ public class TutorialScript : MonoBehaviour
 						if (Input.GetKey ("3")) {
 								yield return new WaitForSeconds (waitTime);
 								finishBEV = true;
-								tutorial.text = "Press 3 again to switch back.";
+								tutorial.text = "Spread fingers again to switch back.";
 						}
 				} else if (finishTurnLeft == true) {
 						//turn right now
 						if (Input.GetKey ("right")) {
 								yield return new WaitForSeconds (waitTime);
 								finishTurnRight = true;
-								tutorial.text = "Press 3 to switch to birds'-eye-view.";
+								tutorial.text = "Spread fingers to switch to birds'-eye-view.";
 						}
 				} else if (finishWalk == true) {
 						//turn left now
