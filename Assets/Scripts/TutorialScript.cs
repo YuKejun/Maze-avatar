@@ -36,7 +36,7 @@ public class TutorialScript : MonoBehaviour
 								yield return new WaitForSeconds (waitTime);
 								tutorial.text = "Congratulation! You have finished the tutorial!\nThe game will start now.";
 								yield return new WaitForSeconds (waitTime);
-								Application.LoadLevel (CharactorController.levelToLoad);
+								Application.LoadLevel (InGameMenuScript.levelToLoad);
 						}
 				} else if (finishTurnRight == true) {
 						//BEV now
@@ -87,7 +87,7 @@ public class TutorialScript : MonoBehaviour
 				GUI.skin = guiSkin;
 		
 				if (GUI.Button (new Rect ((0), Screen.height - 20, 60, 20), "Skip")) {
-						Application.LoadLevel (CharactorController.levelToLoad);
+						Application.LoadLevel (InGameMenuScript.levelToLoad);
 				}
 		
 		}
