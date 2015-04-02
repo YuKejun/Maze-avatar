@@ -34,7 +34,7 @@ public class TutorialScript : MonoBehaviour
 				if (finishBEV == true) {
 						if (Input.GetKey ("3")) {
 								yield return new WaitForSeconds (waitTime);
-								tutorial.text = "Congratulation! You have finished the tutorial!";
+								tutorial.text = "Congratulation! You have finished the tutorial!\nThe game will start now.";
 								yield return new WaitForSeconds (waitTime);
 								Application.LoadLevel (CharactorController.levelToLoad);
 						}

@@ -36,6 +36,7 @@ public class CharactorController : MonoBehaviour
 		public float final_radius = 0.6f;
 		public float final_height = 0.6f;
 		public float final_rot_speed = 15.0f;
+		public float final_scene_duration = 10.0f;
 		private Vector3 final_center;
 		
 		public static bool can_switch = true;
@@ -221,7 +222,7 @@ public class CharactorController : MonoBehaviour
 				animation.CrossFade (animationList [0] as string, 0.01f);
 				winText.text = "YOU WIN!";
 				double timer = 0;
-				while (timer < 8) {
+				while (timer < final_scene_duration) {
 //			Debug.Log (transform.position);
 						timer += Time.deltaTime;
 						can_action = false;
