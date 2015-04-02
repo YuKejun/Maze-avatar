@@ -10,7 +10,7 @@ public class CharactorController : MonoBehaviour
 	
 		public Camera camera;
 
-		public float animationSpeed = 1.0f;
+//		public float animationSpeed = 1.0f;
 		public GUIText winText;
 	
 		private ArrayList animationList;//list of animations
@@ -25,7 +25,7 @@ public class CharactorController : MonoBehaviour
 		private Vector3 walking_dest;
 
 		// for turning control
-		private bool is_rotating;
+//		private bool is_rotating;
 		private Quaternion rotate_dest;
 
 		// for camera switching control
@@ -36,6 +36,7 @@ public class CharactorController : MonoBehaviour
 		public float final_radius = 0.6f;
 		public float final_height = 0.6f;
 		public float final_rot_speed = 15.0f;
+		public double final_time = 8.0f;
 		private Vector3 final_center;
 		
 		public static bool can_switch = true;
@@ -221,8 +222,8 @@ public class CharactorController : MonoBehaviour
 				camera.transform.LookAt (final_center);
 				animation.CrossFade (animationList [0] as string, 0.01f);
 				winText.text = "YOU WIN!";
-				double timer = 0;
-				while (timer < 8) {
+				float timer = 0;
+				while (timer < final_time) {
 //			Debug.Log (transform.position);
 						timer += Time.deltaTime;
 						can_action = false;

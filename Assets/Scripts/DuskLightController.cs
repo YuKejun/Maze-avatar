@@ -18,11 +18,5 @@ public class DuskLightController : MonoBehaviour {
 			light.intensity = Mathf.MoveTowards (light.intensity, targetIntensity, targetIntensity / duration * Time.deltaTime);
 			yield return null;
 		}
-		print("done");
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
