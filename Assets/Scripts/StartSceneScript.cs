@@ -55,7 +55,8 @@ public class StartSceneScript : MonoBehaviour {
 		GUI.TextField(new Rect((Screen.width / 10), (float) 0.55 * Screen.height, (float) 0.4 * Screen.width, (Screen.width / 20)), displayStr);
 		if (GUI.Button (new Rect ((Screen.width / 10), (float) 0.70 * Screen.height, (float) 0.4 * Screen.width, (Screen.width / 20)), "Start!"))
 		{
-			Application.LoadLevel(levelToPlay);
+			LevelOneScript.levelToLoad = levelToPlay;
+			Application.LoadLevel(3);
 		}
 		if (GUI.Button (new Rect ((7 * Screen.width / 10), (float) 0.70 * Screen.height, (Screen.width / 6), (Screen.width / 20)), "Quit"))
 		{

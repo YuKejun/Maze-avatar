@@ -8,7 +8,7 @@ public class LevelOneScript : MonoBehaviour {
 	public bool DragWindow = false;
 	public string levelToLoadWhenClickedPlay = "";
 	public string[] AboutTextLines = new string[0];
-	
+	public static int levelToLoad = 1;
 	
 	private string clicked = "hide", MessageDisplayOnAbout = "About \n ";
 	private Rect WindowRect = new Rect((Screen.width / 2) - 100, Screen.height / 2, 200, 200);
