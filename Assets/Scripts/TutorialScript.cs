@@ -35,7 +35,9 @@ public class TutorialScript : MonoBehaviour
 						if (Input.GetKey ("3")) {
 								yield return new WaitForSeconds (waitTime);
 								tutorial.text = "Congratulation! You have finished the tutorial!";
-						}
+								yield return new WaitForSeconds (waitTime);
+								Application.LoadLevel(LevelOneScript.levelToLoad);
+			}
 				} else if (finishTurnRight == true) {
 						//BEV now
 						if (Input.GetKey ("3")) {
