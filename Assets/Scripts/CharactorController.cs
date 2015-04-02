@@ -216,13 +216,16 @@ public class CharactorController : MonoBehaviour
 				camera.transform.LookAt (final_center);
 				animation.CrossFade (animationList [0] as string, 0.01f);
 				winText.text = "YOU WIN!";
-				while (true) {
+				double timer = 0;
+				while (timer < 8) {
 //			Debug.Log (transform.position);
+						timer += Time.deltaTime;
 						can_action = false;
 						camera.transform.LookAt (final_center);
 						camera.transform.RotateAround (final_center, Vector3.up, final_rot_speed * Time.deltaTime);
 						yield return null;
 				}
+				Application.LoadLevel (LevelOneScript.levelToLoad);
 		}
 	
 //		private bool checkAndTurn (KeyCode keycode, int rotation)
