@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StartSceneScript : MonoBehaviour {
+public class StartSceneOld : MonoBehaviour {
 
 	public GUISkin guiSkin;
 	public Texture2D background, LOGO;
