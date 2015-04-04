@@ -18,7 +18,6 @@ public class StartSceneScript : MonoBehaviour {
 		}
 		MessageDisplayOnAbout += "Maze By Myo YAY\n";
 		MessageDisplayOnAbout += "Press Esc To Go Back\n";
-
 	}
 	
 	private void OnGUI()
@@ -27,9 +26,8 @@ public class StartSceneScript : MonoBehaviour {
 			GUI.DrawTexture(new Rect(0,0,Screen.width , Screen.height),background);
 		if (LOGO != null && clicked != "about")
 			GUI.DrawTexture(new Rect((Screen.width / 2) - 100, 30, 200, 200), LOGO);
-		
-		GUI.skin = guiSkin;
 
+		GUI.skin = guiSkin;
 		if (GUI.Button (new Rect ((Screen.width / 10), (float) 0.25 * Screen.height, (Screen.width / 6), (Screen.width / 20)), "Level 1"))
 		{
 			levelToPlay  = 1;
