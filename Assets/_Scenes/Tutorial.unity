@@ -1060,7 +1060,7 @@ GUIText:
   m_TabSize: 4
   m_Font: {fileID: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 20
+  m_FontSize: 22
   m_FontStyle: 1
   m_Color:
     serializedVersion: 2
@@ -1238,7 +1238,6 @@ MonoBehaviour:
   walking_speed: 1.20000005
   rotating_speed: 90
   camera: {fileID: 1970875730}
-  animationSpeed: 1
   winText: {fileID: 0}
   bird_height: 10
   bird_angle: 70
@@ -1402,10 +1401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tutorial: {fileID: 1305156932}
   waitTime: 2.5
-  guiSkin: {fileID: 0}
-  background: {fileID: 0}
-  LOGO: {fileID: 0}
-  AboutTextLines: []
 --- !u!4 &1916808401
 Transform:
   m_ObjectHideFlags: 0
@@ -1521,12 +1516,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78fdb8528fa34d35b308cf7cbd41430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bird_height: 10
-  bird_angle: 70
-  switch_time: 1
-  final_radius: 0
-  final_height: 0
-  final_rot_speed: 0
 --- !u!81 &1970875732
 AudioListener:
   m_ObjectHideFlags: 0
