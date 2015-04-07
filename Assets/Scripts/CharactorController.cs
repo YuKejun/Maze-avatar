@@ -118,7 +118,7 @@ public class CharactorController : MonoBehaviour
 //				camController.enableSwitch(false);
 						walking_dest = walking_origin + transform.rotation * Vector3.forward * grid_size;
 						rigidbody.velocity = transform.rotation * Vector3.forward * walking_speed;
-						while (Vector3.Distance (transform.position, walking_dest) > walking_speed * Time.deltaTime) {
+						while (Vector3.Distance (transform.position, walking_origin) < grid_size - walking_speed * Time.deltaTime) {
 								if (!can_walk) {
 										yield break;
 								}
