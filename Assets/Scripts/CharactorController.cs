@@ -61,7 +61,7 @@ public class CharactorController : MonoBehaviour
 		}
 	
 		// Update is called once per frame
-		void Update ()
+		void FixedUpdate ()
 		{
 //				if (!camController.isAtBirdEyeView () && !camController.isSwitching () && can_action) {
 				if (can_action) {
