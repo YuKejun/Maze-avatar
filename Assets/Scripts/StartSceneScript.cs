@@ -20,9 +20,9 @@ public class StartSceneScript : MonoBehaviour {
 
 	public void levelTwoButtonClicked()
 	{
-		InGameMenuScript.levelToLoad = 2;
-		levelOneButton.GetComponent<Image> ().color = Color.black;
-		levelTwoButton.GetComponent<Image> ().color = Color.grey;
+//		InGameMenuScript.levelToLoad = 2;
+//		levelOneButton.GetComponent<Image> ().color = Color.black;
+//		levelTwoButton.GetComponent<Image> ().color = Color.grey;
 	}
 
 	public void birdEyeOnButtonClicked()
