@@ -14,7 +14,8 @@ public class InGameMenuScript : MonoBehaviour {
 		}
 		if (clicked == "hide") {
 			if (GUI.Button (new Rect (0, Screen.height - 30, 100, 30), "Menu")) {
-				CharactorController.can_action = false;
+//				CharactorController.can_action = false;
+				Time.timeScale = 0;
 				clicked = "";
 			}
 		}
@@ -25,16 +26,20 @@ public class InGameMenuScript : MonoBehaviour {
 	{
 		//buttons 
 		if (GUILayout.Button ("Resume")) {
-			CharactorController.can_action = true;
+			Time.timeScale = 1;
+//			CharactorController.can_action = true;
 			clicked = "hide";
 		}
 		if (GUILayout.Button ("Level 1")) {
+			Time.timeScale = 1;
 			Application.LoadLevel (1);
 		}
 		if (GUILayout.Button ("Level 2")) {
+			Time.timeScale = 1;
 			Application.LoadLevel (2);
 		}
 		if (GUILayout.Button ("Quit Level")) {
+			Time.timeScale = 1;
 			Application.LoadLevel (0);
 		}
 		
