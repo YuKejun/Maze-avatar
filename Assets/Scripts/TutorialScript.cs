@@ -16,6 +16,7 @@ public class TutorialScript : MonoBehaviour
 		public RawImage iconWaveLeft;
 		public RawImage iconWaveRight;
 		public RawImage iconSpread;
+		public RawImage iconCong;
 
 		// Use this for initialization
 		void Start ()
@@ -30,13 +31,17 @@ public class TutorialScript : MonoBehaviour
 				iconSpread.enabled = false;
 				iconWaveLeft.enabled = false;
 				iconWaveRight.enabled = false;
+				iconCong.enabled = false;
 	
 		}
 	
 		// Update is called once per frame
 		void FixedUpdate ()
 		{
-				StartCoroutine (Tutor ());
+				if (CharactorController.can_switch == true)
+						StartCoroutine (Tutor ());
+				else
+						StartCoroutine (TutorwoBEV ());
 		}
 
 		IEnumerator Tutor ()
@@ -46,6 +51,7 @@ public class TutorialScript : MonoBehaviour
 								yield return new WaitForSeconds (waitTime);
 								tutorial.text = "Congratulation!\nYou have finished the tutorial!\nThe game will start now.";
 								iconSpread.enabled = false;
+								iconCong.enabled = true;
 								yield return new WaitForSeconds (finalWaitTime);
 								Application.LoadLevel (InGameMenuScript.levelToLoad);
 						}
@@ -88,6 +94,41 @@ public class TutorialScript : MonoBehaviour
 				}
 		}
 
+		IEnumerator TutorwoBEV ()
+		{
+				if (finishTurnLeft == true) {
+						if (Input.GetKey ("right")) {
+								yield return new WaitForSeconds (waitTime);
+								tutorial.text = "Congratulation!\nYou have finished the tutorial!\nThe game will start now.";
+								iconWaveRight.enabled = false;
+								iconCong.enabled = true;
+								yield return new WaitForSeconds (finalWaitTime);
+								Application.LoadLevel (InGameMenuScript.levelToLoad);
+						}
+				} else if (finishWalk == true) {
+						//turn left now
+						if (Input.GetKey ("left")) {
+								yield return new WaitForSeconds (waitTime);
+								finishTurnLeft = true;
+								tutorial.text = "Wave right to turn right.";
+								iconWaveLeft.enabled = false;
+								iconWaveRight.enabled = true;
+				
+						}
+				} else {
+						//walk now
+						if (Input.GetKey ("space")) {
+								yield return new WaitForSeconds (waitTime);
+								finishWalk = true;
+								tutorial.text = "Wave left to turn left.";
+								iconFist.enabled = false;
+								iconWaveLeft.enabled = true;
+						}
+			
+				}
+		}
+	
+	
 		private void OnGUI ()
 		{
 				if (GUI.Button (new Rect ((0), Screen.height - 20, 60, 20), "Skip")) {
