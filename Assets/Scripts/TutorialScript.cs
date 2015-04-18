@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class TutorialScript : MonoBehaviour
@@ -10,6 +11,11 @@ public class TutorialScript : MonoBehaviour
 		private bool finishTurnRight;
 		private bool finishBEV;
 		public float waitTime;
+		public float finalWaitTime;
+		public RawImage iconFist;
+		public RawImage iconWaveLeft;
+		public RawImage iconWaveRight;
+		public RawImage iconSpread;
 
 		// Use this for initialization
 		void Start ()
@@ -20,6 +26,10 @@ public class TutorialScript : MonoBehaviour
 				finishTurnRight = false;
 				finishBEV = false;
 				tutorial.text = "Fist to walk forward";
+				iconFist.enabled = true;
+				iconSpread.enabled = false;
+				iconWaveLeft.enabled = false;
+				iconWaveRight.enabled = false;
 	
 		}
 	
@@ -34,8 +44,9 @@ public class TutorialScript : MonoBehaviour
 				if (finishBEV == true) {
 						if (Input.GetKey ("3")) {
 								yield return new WaitForSeconds (waitTime);
-								tutorial.text = "Congratulation! You have finished the tutorial!\nThe game will start now.";
-								yield return new WaitForSeconds (waitTime);
+								tutorial.text = "Congratulation!\nYou have finished the tutorial!\nThe game will start now.";
+								iconSpread.enabled = false;
+								yield return new WaitForSeconds (finalWaitTime);
 								Application.LoadLevel (InGameMenuScript.levelToLoad);
 						}
 				} else if (finishTurnRight == true) {
@@ -43,14 +54,16 @@ public class TutorialScript : MonoBehaviour
 						if (Input.GetKey ("3")) {
 								yield return new WaitForSeconds (waitTime);
 								finishBEV = true;
-								tutorial.text = "Spread fingers again to switch back.";
+								tutorial.text = "Spread fingers again\nto switch back.";
 						}
 				} else if (finishTurnLeft == true) {
 						//turn right now
 						if (Input.GetKey ("right")) {
 								yield return new WaitForSeconds (waitTime);
 								finishTurnRight = true;
-								tutorial.text = "Spread fingers to switch to birds'-eye-view.";
+								tutorial.text = "Spread fingers to switch to\nbirds'-eye-view.";
+								iconWaveRight.enabled = false;
+								iconSpread.enabled = true;
 						}
 				} else if (finishWalk == true) {
 						//turn left now
@@ -58,6 +71,9 @@ public class TutorialScript : MonoBehaviour
 								yield return new WaitForSeconds (waitTime);
 								finishTurnLeft = true;
 								tutorial.text = "Wave right to turn right.";
+								iconWaveLeft.enabled = false;
+								iconWaveRight.enabled = true;
+
 						}
 				} else {
 						//walk now
@@ -65,6 +81,8 @@ public class TutorialScript : MonoBehaviour
 								yield return new WaitForSeconds (waitTime);
 								finishWalk = true;
 								tutorial.text = "Wave left to turn left.";
+								iconFist.enabled = false;
+								iconWaveLeft.enabled = true;
 						}
 			
 				}
