@@ -30,14 +30,14 @@ public class InGameMenuScript : MonoBehaviour {
 //			CharactorController.can_action = true;
 			clicked = "hide";
 		}
-		if (GUILayout.Button ("Level 1")) {
+		if (GUILayout.Button ("Restart")) {
 			Time.timeScale = 1;
 			Application.LoadLevel (1);
 		}
-		if (GUILayout.Button ("Level 2")) {
-			Time.timeScale = 1;
-			Application.LoadLevel (2);
-		}
+//		if (GUILayout.Button ("Level 2")) {
+//			Time.timeScale = 1;
+//			Application.LoadLevel (2);
+//		}
 		if (GUILayout.Button ("Quit Level")) {
 			Time.timeScale = 1;
 			Application.LoadLevel (0);
