@@ -2862,10 +2862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0606c1d052df474982946ecfad27cb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid_size: 1
-  walking_speed: 1.20000005
-  rotating_speed: 90
-  camera: {fileID: 806965645}
 --- !u!54 &453826618
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5230,12 +5226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78fdb8528fa34d35b308cf7cbd41430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bird_height: 10
-  bird_angle: 70
-  switch_time: 1
-  final_radius: 0
-  final_height: 0
-  final_rot_speed: 0
 --- !u!1001 &819366677
 Prefab:
   m_ObjectHideFlags: 0
@@ -5515,12 +5505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b78fdb8528fa34d35b308cf7cbd41430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bird_height: 10
-  bird_angle: 70
-  switch_time: 1
-  final_radius: .600000024
-  final_height: .600000024
-  final_rot_speed: 15
 --- !u!81 &833776658
 AudioListener:
   m_ObjectHideFlags: 0
@@ -7254,7 +7238,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: df0777a2e75ec7048b28e7c394efbd53, type: 3}
       propertyPath: m_LocalPosition.x
-      value: .5
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: df0777a2e75ec7048b28e7c394efbd53, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7262,7 +7246,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: df0777a2e75ec7048b28e7c394efbd53, type: 3}
       propertyPath: m_LocalPosition.z
-      value: .5
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: df0777a2e75ec7048b28e7c394efbd53, type: 3}
       propertyPath: m_LocalRotation.x
@@ -10858,12 +10842,12 @@ GUIText:
   m_Text: 
   m_Anchor: 0
   m_Alignment: 0
-  m_PixelOffset: {x: 40, y: 70}
+  m_PixelOffset: {x: 50, y: -70}
   m_LineSpacing: 1
   m_TabSize: 4
   m_Font: {fileID: 0}
   m_Material: {fileID: 0}
-  m_FontSize: 30
+  m_FontSize: 40
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -10877,7 +10861,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1599772006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: .899999976, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -12596,12 +12580,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bea82156dea54767b78b52dd6585294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiSkin: {fileID: 0}
-  background: {fileID: 0}
-  LOGO: {fileID: 0}
-  DragWindow: 0
-  levelToLoadWhenClickedPlay: 
-  AboutTextLines: []
 --- !u!1 &1933261799
 GameObject:
   m_ObjectHideFlags: 0
@@ -12699,7 +12677,7 @@ Transform:
   m_PrefabInternal: {fileID: 1141488330}
   m_GameObject: {fileID: 1935053200}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: .5, y: 0, z: .5}
+  m_LocalPosition: {x: -3, y: 0, z: -4.5}
   m_LocalScale: {x: .00999999978, y: .00999999978, z: .00999999978}
   m_Children:
   - {fileID: 833776656}
@@ -12722,7 +12700,6 @@ MonoBehaviour:
   walking_speed: 1.20000005
   rotating_speed: 90
   camera: {fileID: 833776661}
-  animationSpeed: 1
   winText: {fileID: 1599772007}
   bird_height: 10
   bird_angle: 70
