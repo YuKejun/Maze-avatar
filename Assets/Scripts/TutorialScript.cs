@@ -36,7 +36,7 @@ public class TutorialScript : MonoBehaviour
 		}
 	
 		// Update is called once per frame
-		void FixedUpdate ()
+		void Update ()
 		{
 				if (CharactorController.can_switch == true)
 						StartCoroutine (Tutor ());
