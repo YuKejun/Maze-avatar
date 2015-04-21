@@ -16,7 +16,7 @@ How to deploy Myo
 3. Follow the guide and configure MyoConnect. If it prompt “This Myo is Using a Custom Calibration Profile. Did you calibrate this Myo armband?”, click “No”.
 4. In the end, MyoConnect will display several tutorial videos and ask you to sync with Myo.
 5. You may probably find it hard to sync with Myo, if so, click the Myo icon and go to the “armband manager” -> “calibration” -> “create a profile” to create a custom calibration profile.
-6. Open “maze_by_myo_connector.myo” in the given .zip file (by CTools), click “Install”.
+6. Download and open “maze_by_myo_connector.myo” in the Github repo, click “Install”.
 
 
 Enjoy the game!
